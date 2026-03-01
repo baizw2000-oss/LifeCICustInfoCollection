@@ -1,0 +1,5 @@
+{
+  "name": "Life Insurance Application Portal",
+  "description": "A standardized, multi-step life insurance application form with Supabase integration.",
+  "requestFramePermissions": []
+}
