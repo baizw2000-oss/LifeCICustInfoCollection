@@ -2,5 +2,5 @@
   "name": "Life Insurance Application Portal",
   "description": "A standardized, multi-step life insurance application form with Supabase integration.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
