@@ -34,8 +34,53 @@ function App() {
     resolver: zodResolver(ApplicationSchema),
     mode: 'onChange',
     defaultValues: {
-        financials: { beneficiaries: [{name: '', percentage: 100, isMinor: false}], totalAssets: 0, totalLiabilities: 0 },
-        medical: { history: [], existingInsurance: [] }
+      lifeInsured: {
+        fullName: '',
+        dob: '',
+        phone: '',
+        email: '',
+        address: '',
+        isCanadianCitizen: undefined,
+        isImmigrant: undefined,
+        landingDate: '',
+        employerName: '',
+        jobTitle: '',
+        employerAddress: '',
+      },
+      owner: {
+        relationToInsured: '',
+        fullName: '',
+        dob: '',
+        sin: '',
+        phone: '',
+        email: '',
+        address: '',
+        employerName: '',
+        employerAddress: '',
+        occupation: '',
+        driversLicenseNumber: '',
+        driversLicenseExpiry: '',
+      },
+      financials: {
+        annualIncome: 0,
+        otherIncome: 0,
+        totalAssets: 0,
+        totalLiabilities: 0,
+        netWorth: 0,
+        beneficiaries: [{ name: '', percentage: 100, isMinor: false, trusteeName: '' }],
+      },
+      medical: {
+        height: '',
+        weight: '',
+        weightChange: '',
+        doctorName: '',
+        doctorAddress: '',
+        lastConsultDate: '',
+        lastConsultReason: '',
+        treatments: '',
+        history: [],
+        existingInsurance: [],
+      }
     }
   });
 

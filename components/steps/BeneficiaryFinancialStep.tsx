@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormContext, useFieldArray } from 'react-hook-form';
 import { ApplicationData } from '../../types';
 import { Plus, Trash2 } from 'lucide-react';
 
 export const BeneficiaryFinancialStep: React.FC = () => {
-  const { register, control, watch, formState: { errors } } = useFormContext<ApplicationData>();
+  const { register, control, watch, setValue, formState: { errors } } = useFormContext<ApplicationData>();
   
   const { fields, append, remove } = useFieldArray({
     control,
     name: "financials.beneficiaries"
   });
 
-  const assets = watch('financials.totalAssets') || 0;
-  const liabilities = watch('financials.totalLiabilities') || 0;
+  const watchedAssets = watch('financials.totalAssets');
+  const watchedLiabilities = watch('financials.totalLiabilities');
+
+  const assets = watchedAssets !== undefined && watchedAssets !== null && !isNaN(Number(watchedAssets)) ? Number(watchedAssets) : 0;
+  const liabilities = watchedLiabilities !== undefined && watchedLiabilities !== null && !isNaN(Number(watchedLiabilities)) ? Number(watchedLiabilities) : 0;
   const netWorth = assets - liabilities;
+
+  useEffect(() => {
+    setValue('financials.netWorth', netWorth, { shouldValidate: true, shouldDirty: true });
+  }, [netWorth, setValue]);
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -142,7 +149,7 @@ export const BeneficiaryFinancialStep: React.FC = () => {
                         ${netWorth.toLocaleString()}
                     </div>
                     {/* Hidden input to sync netWorth value */}
-                    <input type="hidden" {...register('financials.netWorth', { value: netWorth })} />
+                    <input type="hidden" {...register('financials.netWorth')} />
                 </div>
             </div>
         </div>
